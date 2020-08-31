@@ -16,15 +16,8 @@ export const useSetUserContext = () => {
 
 export const AuthController = ({ children }) => {
   const [user, setUser] = React.useState({
-    name: "Test user",
-    email: "test@test.com",
-    password: "password"
+    name: "Test user"
   });
-
-  // TODO: Delete about statement and uncomment below statement
-  // const [user, setUser] = React.useState({
-  //   name: "Test user"
-  // });
 
   return (
     <UserContext.Provider value={user}>
