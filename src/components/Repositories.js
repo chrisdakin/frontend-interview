@@ -1,4 +1,7 @@
 import * as React from "react";
+import RepositorySearchResults from './RepositorySearchResults'
+import { useSearchContext, useSetSearchContext } from "../contexts/search";
+import { searchGithub } from '../api/search'
 
 /**
  * Once given an input, fetch the repositories we searched
@@ -14,15 +17,26 @@ import * as React from "react";
  */
 
 const Repositories = () => {
-  let searchResults;
+  const { search, results } = useSearchContext();
+  const setSearchContext = useSetSearchContext();
+
+  const handleChange = () => {
+    setSearchContext({
+      search: search
+    })
+
+    // debounce searchGithub
+    searchGithub();
+  }
+
   return (
     <div>
-      <input name="search-terms" />
-      {searchResults ? (
-        <RepositorySearchResults searchResults={searchResults} />
+      <input name="search-terms" value={search} onChange={handleChange} />
+      {results ? (
+        <RepositorySearchResults searchResults={results} />
       ) : (
-        <div>Enter somee test to search github repositories</div>
-      )}
+          <div>Enter some text to search github repositories</div>
+        )}
     </div>
   );
 };
