@@ -27,7 +27,7 @@ const Repositories = () => {
     setIsTyping(true);
     setSearch({
       ...search,
-      value: event.target.value
+      value: event?.target?.value || ''
     });
     timeout.current = setTimeout(() => setIsTyping(false), 300);
   }

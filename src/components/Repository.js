@@ -14,13 +14,16 @@ const Repository = (props) => {
 
 
     const licenseDisplay = license ?
-        <ul>
-            {license.name}
+        <>
+            License info:
             <ul>
-                <li>spdx id: {license.spdx_id}</li>
-                <li>Link: <a href={license.url}>{license.url}</a></li>
+                {license.name}
+                <ul>
+                    <li>spdx id: {license.spdx_id}</li>
+                    <li>Link: <a href={license.url}>{license.url}</a></li>
+                </ul>
             </ul>
-        </ul>
+        </>
         : null;
 
     const formattedIssuesUrl = issuesUrl?.replace('{/number}', '');
@@ -31,9 +34,8 @@ const Repository = (props) => {
         <ul>
             {issuesUrl && <li><a href={formattedIssuesUrl}>Issues</a></li>}
             {pullsUrl && <li><a href={formattedPullsUrl}>Pull Requests</a></li>}
-            {licenseDisplay}
         </ul>
-
+        {licenseDisplay}
     </div>
 }
 

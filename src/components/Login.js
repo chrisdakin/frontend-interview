@@ -7,8 +7,8 @@ const Login = () => {
     password: ""
   });
   const [error, setError] = React.useState(null);
-  const handleSetEmail = event => setUser(state => ({ ...state, email: event.target.value }));
-  const handleSetPassword = event => setUser(state => ({ ...state, password: event.target.value }));
+  const handleSetEmail = event => setUser(state => ({ ...state, email: event?.target?.value || '' }));
+  const handleSetPassword = event => setUser(state => ({ ...state, password: event?.target?.value || '' }));
 
   React.useEffect(() => {
     setError(null);
