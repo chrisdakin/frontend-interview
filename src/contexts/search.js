@@ -1,30 +1,28 @@
 import * as React from "react";
 
-const SetSearchContext = React.createContext(null);
-const SearchContext = React.createContext(null);
+// export const SetSearchContext = React.createContext(null);
+export const SearchContext = React.createContext(null);
 export const useSearchContext = () => {
     const search = React.useContext(SearchContext);
     if (!search) throw new Error("Used outside of search context");
     return search;
 };
 
-export const useSetSearchContext = () => {
-    const setSearch = React.useContext(SetSearchContext);
-    if (!setSearch) throw new Error("Used outside of setSearch context");
-    return setSearch;
-};
+// export const useSetSearchContext = () => {
+//     const setSearch = React.useContext(SetSearchContext);
+//     if (!setSearch) throw new Error("Used outside of setSearch context");
+//     return setSearch;
+// };
 
-export const AuthController = ({ children }) => {
+export const SearchController = ({ children }) => {
     const [search, setSearch] = React.useState({
-        searchValue: "",
+        value: "",
         results: null
     });
 
     return (
-        <SearchContext.Provider value={search}>
-            <SetSearchContext.Provider value={setSearch}>
-                {children}
-            </SetSearchContext.Provider>
+        <SearchContext.Provider value={{ search, setSearch }}>
+            {children}
         </SearchContext.Provider>
     );
 };

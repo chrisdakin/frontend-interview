@@ -35,7 +35,7 @@ const Profile = () => {
           e.preventDefault();
         }}
       >
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="email"
@@ -43,7 +43,7 @@ const Profile = () => {
           onChange={handleSetEmail}
         />
         <br />
-        <label for="name">Name</label>
+        <label htmlFor="name">Name</label>
         <input
           name="name"
           value={newUser.name}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import RepositorySearchResults from './RepositorySearchResults'
-import { useSearchContext, useSetSearchContext } from "../contexts/search";
-import { searchGithub } from '../api/search'
+import { useSearchContext } from "../contexts/search";
+import { searchGithub } from '../api'
 
 /**
  * Once given an input, fetch the repositories we searched
@@ -17,23 +17,33 @@ import { searchGithub } from '../api/search'
  */
 
 const Repositories = () => {
-  const { search, results } = useSearchContext();
-  const setSearchContext = useSetSearchContext();
+  const { search, setSearch } = useSearchContext();
+  const [isTyping, setIsTyping] = React.useState(false);
+  const timeout = React.useRef();
 
-  const handleChange = () => {
-    setSearchContext({
-      search: search
-    })
-
-    // debounce searchGithub
-    searchGithub();
+  const handleChange = (event) => {
+    // when input is changed, clear out any timeouts to prevent unnecessary request
+    clearTimeout(timeout.current);
+    setIsTyping(true);
+    setSearch({
+      ...search,
+      value: event.target.value
+    });
+    timeout.current = setTimeout(() => setIsTyping(false), 500);
   }
+
+  //debounce: when a user stops typing,
+  React.useEffect(() => {
+    if (!isTyping && search.value) {
+      searchGithub(search, setSearch);
+    }
+  }, [search.value, isTyping])
 
   return (
     <div>
-      <input name="search-terms" value={search} onChange={handleChange} />
-      {results ? (
-        <RepositorySearchResults searchResults={results} />
+      <input name="search-terms" value={search.value} onChange={handleChange} />
+      {search.results ? (
+        <RepositorySearchResults searchResults={search.results} />
       ) : (
           <div>Enter some text to search github repositories</div>
         )}
