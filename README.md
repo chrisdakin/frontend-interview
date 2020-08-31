@@ -50,6 +50,12 @@ Please, answer the following questions in this readme, underneath the question
 
 2. What are 3 things you think `React` does very poorly? What tools do this better, if any?
 
+Answers:
+
+1: Although they've both been out for awhile now, template literals and Object/Array spreading are incredibly useful, I probably use one or the other on a daily basis. As for 'newer' new features, optional chaining makes null checking much easier, although there are a few gotchas that you have to be careful to watch for (i.e. avoiding using it repeatedly on the same variable as it creates a lot of extra code when transpiled; making sure to set a backup if the value you're looking for turns out to be null)
+
+2: Nothing here really comes to mind. In years past I would've said class-based components lead to a lot of issues like making it more difficult to reuse components and some wonkiness with the 'this' keyword, but a lot of that has been solved with hooks. I honestly love working with React and generally if there's an issue it's more the fault of the way an application or component is structured. React being a view library first and foremost really gives you the ability to shoot yourself in the foot if you're not careful about the way you handle state management or rendering too many complex components, but I don't blame React for this.
+
 ## Submissions
 
 When submitting, please send a link to your fork of this repository or a zip of your completed project to the link provided when you received this repo
