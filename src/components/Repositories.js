@@ -38,7 +38,7 @@ const Repositories = () => {
       searchGithub(search, setSearch);
     }
   }, [search.value, isTyping])
-
+  console.log(search)
   return (
     <div>
       <input name="search-terms" value={search.value} onChange={handleChange} />
