@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 import Home from "./Home";
 import Profile from "./Profile";
 import Repositories from "./Repositories";
+import Repository from "./Repository";
 import { SearchController } from "../contexts/search";
 
 
@@ -16,6 +17,9 @@ const AuthenticatedApplication = () => {
         <Switch>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/repositories/:id">
+            <Repository />
           </Route>
           <Route path="/repositories">
             <Repositories />

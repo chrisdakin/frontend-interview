@@ -29,16 +29,16 @@ const Repositories = () => {
       ...search,
       value: event.target.value
     });
-    timeout.current = setTimeout(() => setIsTyping(false), 500);
+    timeout.current = setTimeout(() => setIsTyping(false), 300);
   }
 
-  //debounce: when a user stops typing,
+  //debounce: when a user stops typing
   React.useEffect(() => {
     if (!isTyping && search.value) {
-      searchGithub(search, setSearch);
+      searchGithub(search.value, setSearch);
     }
-  }, [search.value, isTyping])
-  console.log(search)
+  }, [search.value, isTyping, setSearch])
+
   return (
     <div>
       <input name="search-terms" value={search.value} onChange={handleChange} />

@@ -1,8 +1,9 @@
 import * as React from "react";
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const RepositorySearchResults = ({ searchResults }) => {
-    const Container = styled.div`
+  const Container = styled.div`
     margin: 30px auto;
     border: 1px solid black;
     :hover {
@@ -25,25 +26,28 @@ const RepositorySearchResults = ({ searchResults }) => {
 
     `
 
-    const mappedResults = searchResults.map(({
-        description,
-        score,
-        fullName,
-        openIssuesCount,
-        stargazersCount
-    }) => (
-            <Container role="button">
-                <ul>
-                    <li name="description">Description: {description}</li>
-                    <li name="score">Score: {score}</li>
-                    <li name="full name">Full Name: {fullName}</li>
-                    <li name="open issues count">Open Issues Count: {openIssuesCount}</li>
-                    <li name="stargazers count">Stargazers Count: {stargazersCount}</li>
-                </ul>
-            </Container >
-        ));
+  const mappedResults = searchResults.map(({
+    id,
+    description,
+    score,
+    fullName,
+    openIssuesCount,
+    stargazersCount
+  }) => (
+      <Container>
+        <Link to={`/repositories/${id}`}>
+          <ul>
+            <li name="description">Description: {description}</li>
+            <li name="score">Score: {score}</li>
+            <li name="full name">Full Name: {fullName}</li>
+            <li name="open issues count">Open Issues Count: {openIssuesCount}</li>
+            <li name="stargazers count">Stargazers Count: {stargazersCount}</li>
+          </ul>
+        </Link>
+      </Container >
+    ));
 
-    return <div>{mappedResults}</div>
+  return <div>{mappedResults}</div>
 }
 
 export default RepositorySearchResults;
