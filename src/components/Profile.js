@@ -1,11 +1,31 @@
 import * as React from "react";
-import { useUserContext } from "../contexts/user";
+import { useUserContext, useSetUserContext } from "../contexts/user";
 
 /**
  * This should update the user context with the new values for email and name
  */
 const Profile = () => {
   const user = useUserContext();
+  const setUserContext = useSetUserContext();
+
+  const [newUser, setNewUser] = React.useState({
+    email: user?.email || '',
+    name: user.name || ''
+  });
+
+  const handleSetEmail = event =>
+    setNewUser({ ...newUser, email: event?.target?.value || '' });
+  const handleSetName = event =>
+    setNewUser({ ...newUser, name: event?.target?.value || '' });
+
+  const handleSubmit = () => {
+    const { email, name } = newUser;
+    if (email?.trim() && name?.trim()) {
+      setUserContext({
+        email, name
+      })
+    }
+  }
 
   return (
     <div>
@@ -15,21 +35,22 @@ const Profile = () => {
           e.preventDefault();
         }}
       >
+        <label for="email">Email</label>
         <input
           name="email"
-          value={user.email}
-          onChange={e => {
-            user.email = e.target.value;
-          }}
+          type="email"
+          value={newUser.email}
+          onChange={handleSetEmail}
         />
+        <br />
+        <label for="name">Name</label>
         <input
           name="name"
-          value={user.name}
-          onChange={e => {
-            user.name = e.target.value;
-          }}
+          value={newUser.name}
+          onChange={handleSetName}
         />
-        <button type="submit">Submit</button>
+        <br />
+        <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );

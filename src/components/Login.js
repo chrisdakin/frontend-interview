@@ -7,7 +7,7 @@ const Login = () => {
     password: ""
   });
   const [error, setError] = React.useState(null);
-  const handleSetUser = event => setUser(state => ({ ...state, email: event.target.value }));
+  const handleSetEmail = event => setUser(state => ({ ...state, email: event.target.value }));
   const handleSetPassword = event => setUser(state => ({ ...state, password: event.target.value }));
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ const Login = () => {
           name="email"
           type="email"
           value={user.email}
-          onChange={handleSetUser}
+          onChange={handleSetEmail}
         />
         <input
           name="password"
